@@ -32,20 +32,20 @@ function Exec() {
     throw new Error("Command should be a string.");
   }
   if (arguments.length === 2) {
-    if (Node.util.isObject(arguments[1])) {
+    if (arguments[1] !== null && typeof arguments[1] === "object") {
       options = arguments[1];
-    } else if (Node.util.isFunction(arguments[1])) {
+    } else if (typeof arguments[1] === "function") {
       end = arguments[1];
     } else {
       throw new Error("Expected options or callback.");
     }
   } else if (arguments.length === 3) {
-    if (Node.util.isObject(arguments[1])) {
+    if (arguments[1] !== null && typeof arguments[1] === "object") {
       options = arguments[1];
     } else {
       throw new Error("Expected options to be an object.");
     }
-    if (Node.util.isFunction(arguments[2])) {
+    if (typeof arguments[2] === "function") {
       end = arguments[2];
     } else {
       throw new Error("Expected callback to be a function.");
@@ -174,7 +174,7 @@ function Linux(instance, end) {
         // "Upon successful completion, the return value is the return value of
         // PROGRAM. If the calling process is not authorized or an
         // authorization could not be obtained through authentication or an
-        // error occured, pkexec exits with a return value of 127. If the
+        // error occurred, pkexec exits with a return value of 127. If the
         // authorization could not be obtained because the user dismissed the
         // authentication dialog, pkexec exits with a return value of 126."
         //
